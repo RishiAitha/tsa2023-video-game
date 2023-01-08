@@ -1,0 +1,116 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://Assets/BasicTile.png" type="Texture" id=1]
+[ext_resource path="res://Tile/Tile.gd" type="Script" id=2]
+[ext_resource path="res://Assets/RightTile.png" type="Texture" id=3]
+[ext_resource path="res://Assets/TRTile.png" type="Texture" id=4]
+[ext_resource path="res://Assets/TLTile.png" type="Texture" id=5]
+[ext_resource path="res://Assets/UpTile.png" type="Texture" id=6]
+[ext_resource path="res://Assets/DownTile.png" type="Texture" id=7]
+[ext_resource path="res://Assets/BLTile.png" type="Texture" id=8]
+[ext_resource path="res://Assets/LeftTile.png" type="Texture" id=9]
+[ext_resource path="res://Assets/BRTile.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Unsafe-UpTile.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Unsafe-DownTile.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Unsafe-LeftTile.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Unsafe-RightTile.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Unsafe-Highlight-DownTile.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Unsafe-Highlight-RightTile.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Unsafe-Highlight-UpTile.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Highlight-TRTile.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Highlight-BLTile.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Highlight-LeftTile.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Unsafe-Highlight-LeftTile.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Highlight-UpTile.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Highlight-DownTile.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Highlight-RightTile.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Highlight-BRTile.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Highlight-TLTile.png" type="Texture" id=26]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "BL",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 25 ) ],
+"loop": true,
+"name": "BR",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 23 ) ],
+"loop": true,
+"name": "Down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "Right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 26 ) ],
+"loop": true,
+"name": "TL",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "TR",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "Unsafe-Down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "Unsafe-Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "Unsafe-Right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "Unsafe-Up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 22 ) ],
+"loop": true,
+"name": "Up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Tile" type="Area2D" groups=["all_tiles"]]
+position = Vector2( 32, 32 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+frames = SubResource( 2 )
+animation = "BL"
+
+[connection signal="input_event" from="." to="." method="_on_Tile_input_event"]
