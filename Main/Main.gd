@@ -8,9 +8,7 @@
 #	||---------------------------------------------------------------||
 #	
 #	To-Do:
-#		Sound Effects
-#		Add comments to code
-#		Testing & bug fixes
+#		Music
 
 extends Node
 
@@ -42,6 +40,8 @@ var colors = ColorsSingleton.colors # current characters in play, using a global
 var currentIndex = 0 # index used to increment the current player
 var currentPlayer = colors[currentIndex] # current player color that can move
 
+var stopAudio = false
+
 onready var tween = get_node("Tween")
 
 func _ready(): # ryns when the main scene is initialized into the scene tree
@@ -58,6 +58,7 @@ func _ready(): # ryns when the main scene is initialized into the scene tree
 	$MainMenu.hide()
 	$RollDisplay.playing = false
 	$FlipDisplay.playing = false
+	$BGMusic.play()
 	
 	for pawn in get_tree().get_nodes_in_group("all_pawns"):
 		if (colors.find(pawn.color) == -1):
@@ -72,6 +73,10 @@ func _process(_delta): # runs every frame
 	$SkipButton.color = currentPlayer
 	$PlayAgain.color = currentPlayer
 	$MainMenu.color = currentPlayer
+	
+	var musicPosition = $BGMusic.get_playback_position()
+	if ((musicPosition > 15.99 || (musicPosition > 7.99 && musicPosition < 8.02)) && stopAudio):
+		$BGMusic.stop()
 
 func _on_RollButton_pressed(): # runs when the roll button is pressed
 	if (!rolled):
@@ -351,6 +356,7 @@ func _on_ReviveButton_pressed(): # when the revive options is chosen
 			yield(get_tree().create_timer(1), "timeout")
 			newPawn.get_node("AnimatedSprite").playing = false
 			newPawn.get_node("AnimatedSprite").speed_scale = 1
+			newPawn.get_node("AnimatedSprite").frame = 0
 	
 	# hides buttons and emits the signal saying that the buttons are done
 	$ReviveButton.hide()
@@ -424,8 +430,12 @@ func updateColors(): # updates the current players based on if there are any paw
 func gameOver(reason): # called when the game ends, taking the reason that the game ended
 	$RollButton.hide()
 	
+	yield(get_tree().create_timer(1), "timeout") # just to see what's happening easier
+	
+	stopAudio = true
+	
 	for child in self.get_children():
-		if (child.name != "Tween" && child.name != "Background"):
+		if (child.name != "Tween" && child.name != "Background" && child.name != "BGMusic"):
 			child.hide()
 	
 	$EndingDisplay.show()

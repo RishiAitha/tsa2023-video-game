@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Tile/Tile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Pawn/Pawn.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Assets/HeadsFlip.png" type="Texture" id=11]
 [ext_resource path="res://Assets/TailsFlip.png" type="Texture" id=12]
 [ext_resource path="res://Assets/GameBackground.png" type="Texture" id=13]
+[ext_resource path="res://Assets/ArcadeGameBGM#17.wav" type="AudioStream" id=14]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -32,6 +33,9 @@ animations = [ {
 
 [node name="Main" type="Node"]
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
 pawn_scene = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="."]
@@ -39,515 +43,532 @@ position = Vector2( 512, 320 )
 texture = ExtResource( 13 )
 
 [node name="1-1" parent="." instance=ExtResource( 1 )]
-position = Vector2( 224, 96 )
+position = Vector2( 288, 96 )
 opposite_tile = "1-15"
 type = "TL"
 
 [node name="1-2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 288, 96 )
+position = Vector2( 352, 96 )
 opposite_tile = "1-21"
 safe = false
 type = "Up"
 
 [node name="1-3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 352, 96 )
+position = Vector2( 416, 96 )
 opposite_tile = "1-20"
 spawn = "Blue"
 type = "Up"
 
 [node name="1-4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 416, 96 )
+position = Vector2( 480, 96 )
 opposite_tile = "1-19"
 spawn = "Blue"
 type = "Up"
 
 [node name="1-5" parent="." instance=ExtResource( 1 )]
-position = Vector2( 480, 96 )
+position = Vector2( 544, 96 )
 opposite_tile = "1-18"
 spawn = "Blue"
 type = "Up"
 
 [node name="1-6" parent="." instance=ExtResource( 1 )]
-position = Vector2( 544, 96 )
+position = Vector2( 608, 96 )
 opposite_tile = "1-17"
 spawn = "Blue"
 type = "Up"
 
 [node name="1-7" parent="." instance=ExtResource( 1 )]
-position = Vector2( 608, 96 )
+position = Vector2( 672, 96 )
 opposite_tile = "1-16"
 safe = false
 type = "Up"
 
 [node name="1-8" parent="." instance=ExtResource( 1 )]
-position = Vector2( 672, 96 )
+position = Vector2( 736, 96 )
 opposite_tile = "1-22"
 type = "TR"
 
 [node name="1-9" parent="." instance=ExtResource( 1 )]
-position = Vector2( 672, 160 )
+position = Vector2( 736, 160 )
 opposite_tile = "1-28"
 safe = false
 type = "Right"
 
 [node name="1-10" parent="." instance=ExtResource( 1 )]
-position = Vector2( 672, 224 )
+position = Vector2( 736, 224 )
 opposite_tile = "1-27"
 spawn = "Red"
 type = "Right"
 
 [node name="1-11" parent="." instance=ExtResource( 1 )]
-position = Vector2( 672, 288 )
+position = Vector2( 736, 288 )
 opposite_tile = "1-26"
 spawn = "Red"
 type = "Right"
 
 [node name="1-12" parent="." instance=ExtResource( 1 )]
-position = Vector2( 672, 352 )
+position = Vector2( 736, 352 )
 opposite_tile = "1-25"
 spawn = "Red"
 type = "Right"
 
 [node name="1-13" parent="." instance=ExtResource( 1 )]
-position = Vector2( 672, 416 )
+position = Vector2( 736, 416 )
 opposite_tile = "1-24"
 spawn = "Red"
 type = "Right"
 
 [node name="1-14" parent="." instance=ExtResource( 1 )]
-position = Vector2( 672, 480 )
+position = Vector2( 736, 480 )
 opposite_tile = "1-23"
 safe = false
 type = "Right"
 
 [node name="1-15" parent="." instance=ExtResource( 1 )]
-position = Vector2( 672, 544 )
+position = Vector2( 736, 544 )
 type = "BR"
 
 [node name="1-16" parent="." instance=ExtResource( 1 )]
-position = Vector2( 608, 544 )
+position = Vector2( 672, 544 )
 opposite_tile = "1-7"
 safe = false
 type = "Down"
 
 [node name="1-17" parent="." instance=ExtResource( 1 )]
-position = Vector2( 544, 544 )
+position = Vector2( 608, 544 )
 opposite_tile = "1-6"
 spawn = "Yellow"
 type = "Down"
 
 [node name="1-18" parent="." instance=ExtResource( 1 )]
-position = Vector2( 480, 544 )
+position = Vector2( 544, 544 )
 opposite_tile = "1-5"
 spawn = "Yellow"
 type = "Down"
 
 [node name="1-19" parent="." instance=ExtResource( 1 )]
-position = Vector2( 416, 544 )
+position = Vector2( 480, 544 )
 opposite_tile = "1-4"
 spawn = "Yellow"
 type = "Down"
 
 [node name="1-20" parent="." instance=ExtResource( 1 )]
-position = Vector2( 352, 544 )
+position = Vector2( 416, 544 )
 opposite_tile = "1-3"
 spawn = "Yellow"
 type = "Down"
 
 [node name="1-21" parent="." instance=ExtResource( 1 )]
-position = Vector2( 288, 544 )
+position = Vector2( 352, 544 )
 opposite_tile = "1-2"
 safe = false
 type = "Down"
 
 [node name="1-22" parent="." instance=ExtResource( 1 )]
-position = Vector2( 224, 544 )
+position = Vector2( 288, 544 )
 opposite_tile = "1-8"
 type = "BL"
 
 [node name="1-23" parent="." instance=ExtResource( 1 )]
-position = Vector2( 224, 480 )
+position = Vector2( 288, 480 )
 opposite_tile = "1-14"
 safe = false
 type = "Left"
 
 [node name="1-24" parent="." instance=ExtResource( 1 )]
-position = Vector2( 224, 416 )
+position = Vector2( 288, 416 )
 opposite_tile = "1-13"
 spawn = "Green"
 type = "Left"
 
 [node name="1-25" parent="." instance=ExtResource( 1 )]
-position = Vector2( 224, 352 )
+position = Vector2( 288, 352 )
 opposite_tile = "1-12"
 spawn = "Green"
 type = "Left"
 
 [node name="1-26" parent="." instance=ExtResource( 1 )]
-position = Vector2( 224, 288 )
+position = Vector2( 288, 288 )
 opposite_tile = "1-11"
 spawn = "Green"
 type = "Left"
 
 [node name="1-27" parent="." instance=ExtResource( 1 )]
-position = Vector2( 224, 224 )
+position = Vector2( 288, 224 )
 opposite_tile = "1-10"
 spawn = "Green"
 type = "Left"
 
 [node name="1-28" parent="." instance=ExtResource( 1 )]
-position = Vector2( 224, 160 )
+position = Vector2( 288, 160 )
 opposite_tile = "1-9"
 safe = false
 type = "Left"
 
 [node name="2-1" parent="." instance=ExtResource( 1 )]
-position = Vector2( 288, 160 )
+position = Vector2( 352, 160 )
 opposite_tile = "2-11"
 type = "TL"
 
 [node name="2-2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 352, 160 )
+position = Vector2( 416, 160 )
 opposite_tile = "2-15"
 spawn = "Blue"
 safe = false
 type = "Up"
 
 [node name="2-3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 416, 160 )
+position = Vector2( 480, 160 )
 opposite_tile = "2-14"
 spawn = "Blue"
 type = "Up"
 
 [node name="2-4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 480, 160 )
+position = Vector2( 544, 160 )
 opposite_tile = "2-13"
 spawn = "Blue"
 type = "Up"
 
 [node name="2-5" parent="." instance=ExtResource( 1 )]
-position = Vector2( 544, 160 )
+position = Vector2( 608, 160 )
 opposite_tile = "2-12"
 spawn = "Blue"
 safe = false
 type = "Up"
 
 [node name="2-6" parent="." instance=ExtResource( 1 )]
-position = Vector2( 608, 160 )
+position = Vector2( 672, 160 )
 opposite_tile = "2-16"
 type = "TR"
 
 [node name="2-7" parent="." instance=ExtResource( 1 )]
-position = Vector2( 608, 224 )
+position = Vector2( 672, 224 )
 opposite_tile = "2-20"
 spawn = "Red"
 safe = false
 type = "Right"
 
 [node name="2-8" parent="." instance=ExtResource( 1 )]
-position = Vector2( 608, 288 )
+position = Vector2( 672, 288 )
 opposite_tile = "2-19"
 spawn = "Red"
 type = "Right"
 
 [node name="2-9" parent="." instance=ExtResource( 1 )]
-position = Vector2( 608, 352 )
+position = Vector2( 672, 352 )
 opposite_tile = "2-18"
 spawn = "Red"
 type = "Right"
 
 [node name="2-10" parent="." instance=ExtResource( 1 )]
-position = Vector2( 608, 416 )
+position = Vector2( 672, 416 )
 opposite_tile = "2-17"
 spawn = "Red"
 safe = false
 type = "Right"
 
 [node name="2-11" parent="." instance=ExtResource( 1 )]
-position = Vector2( 608, 480 )
+position = Vector2( 672, 480 )
 opposite_tile = "2-1"
 type = "BR"
 
 [node name="2-12" parent="." instance=ExtResource( 1 )]
-position = Vector2( 544, 480 )
+position = Vector2( 608, 480 )
 opposite_tile = "2-5"
 spawn = "Yellow"
 safe = false
 type = "Down"
 
 [node name="2-13" parent="." instance=ExtResource( 1 )]
-position = Vector2( 480, 480 )
+position = Vector2( 544, 480 )
 opposite_tile = "2-4"
 spawn = "Yellow"
 type = "Down"
 
 [node name="2-14" parent="." instance=ExtResource( 1 )]
-position = Vector2( 416, 480 )
+position = Vector2( 480, 480 )
 opposite_tile = "2-3"
 spawn = "Yellow"
 type = "Down"
 
 [node name="2-15" parent="." instance=ExtResource( 1 )]
-position = Vector2( 352, 480 )
+position = Vector2( 416, 480 )
 opposite_tile = "2-2"
 spawn = "Yellow"
 safe = false
 type = "Down"
 
 [node name="2-16" parent="." instance=ExtResource( 1 )]
-position = Vector2( 288, 480 )
+position = Vector2( 352, 480 )
 opposite_tile = "2-6"
 type = "BL"
 
 [node name="2-17" parent="." instance=ExtResource( 1 )]
-position = Vector2( 288, 416 )
+position = Vector2( 352, 416 )
 opposite_tile = "2-10"
 spawn = "Green"
 safe = false
 type = "Left"
 
 [node name="2-18" parent="." instance=ExtResource( 1 )]
-position = Vector2( 288, 352 )
+position = Vector2( 352, 352 )
 opposite_tile = "2-9"
 spawn = "Green"
 type = "Left"
 
 [node name="2-19" parent="." instance=ExtResource( 1 )]
-position = Vector2( 288, 288 )
+position = Vector2( 352, 288 )
 opposite_tile = "2-8"
 spawn = "Green"
 type = "Left"
 
 [node name="2-20" parent="." instance=ExtResource( 1 )]
-position = Vector2( 288, 224 )
+position = Vector2( 352, 224 )
 opposite_tile = "2-7"
 spawn = "Green"
 safe = false
 type = "Left"
 
 [node name="3-1" parent="." instance=ExtResource( 1 )]
-position = Vector2( 352, 224 )
+position = Vector2( 416, 224 )
 opposite_tile = "3-7"
 spawn = "Green-Blue"
 type = "TL"
 
 [node name="3-2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 416, 224 )
+position = Vector2( 480, 224 )
 opposite_tile = "3-9"
 spawn = "Blue"
 safe = false
 type = "Up"
 
 [node name="3-3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 480, 224 )
+position = Vector2( 544, 224 )
 opposite_tile = "3-8"
 spawn = "Blue"
 safe = false
 type = "Up"
 
 [node name="3-4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 544, 224 )
+position = Vector2( 608, 224 )
 opposite_tile = "3-10"
 spawn = "Blue-Red"
 type = "TR"
 
 [node name="3-5" parent="." instance=ExtResource( 1 )]
-position = Vector2( 544, 288 )
+position = Vector2( 608, 288 )
 opposite_tile = "3-12"
 spawn = "Red"
 safe = false
 type = "Right"
 
 [node name="3-6" parent="." instance=ExtResource( 1 )]
-position = Vector2( 544, 352 )
+position = Vector2( 608, 352 )
 opposite_tile = "3-11"
 spawn = "Red"
 safe = false
 type = "Right"
 
 [node name="3-7" parent="." instance=ExtResource( 1 )]
-position = Vector2( 544, 416 )
+position = Vector2( 608, 416 )
 opposite_tile = "3-1"
 spawn = "Red-Yellow"
 type = "BR"
 
 [node name="3-8" parent="." instance=ExtResource( 1 )]
-position = Vector2( 480, 416 )
+position = Vector2( 544, 416 )
 opposite_tile = "3-3"
 spawn = "Yellow"
 safe = false
 type = "Down"
 
 [node name="3-9" parent="." instance=ExtResource( 1 )]
-position = Vector2( 416, 416 )
+position = Vector2( 480, 416 )
 opposite_tile = "3-2"
 spawn = "Yellow"
 safe = false
 type = "Down"
 
 [node name="3-10" parent="." instance=ExtResource( 1 )]
-position = Vector2( 352, 416 )
+position = Vector2( 416, 416 )
 opposite_tile = "3-4"
 spawn = "Yellow-Green"
 type = "BL"
 
 [node name="3-11" parent="." instance=ExtResource( 1 )]
-position = Vector2( 352, 352 )
+position = Vector2( 416, 352 )
 opposite_tile = "3-6"
 spawn = "Green"
 safe = false
 type = "Left"
 
 [node name="3-12" parent="." instance=ExtResource( 1 )]
-position = Vector2( 352, 288 )
+position = Vector2( 416, 288 )
 opposite_tile = "3-5"
 spawn = "Green"
 safe = false
 type = "Left"
 
 [node name="4-1" parent="." instance=ExtResource( 1 )]
-position = Vector2( 416, 288 )
+position = Vector2( 480, 288 )
 opposite_tile = "4-3"
 spawn = "everything"
 type = "TL"
 
 [node name="4-2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 480, 288 )
+position = Vector2( 544, 288 )
 opposite_tile = "4-4"
 spawn = "everything"
 type = "TR"
 
 [node name="4-3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 480, 352 )
+position = Vector2( 544, 352 )
 opposite_tile = "4-1"
 spawn = "everything"
 type = "BR"
 
 [node name="4-4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 416, 352 )
+position = Vector2( 480, 352 )
 opposite_tile = "4-2"
 spawn = "everything"
 type = "BL"
 
 [node name="Blue1" parent="." instance=ExtResource( 2 )]
-position = Vector2( 352, 96 )
-color = "Blue"
-
-[node name="Blue2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 416, 96 )
 color = "Blue"
 
-[node name="Blue3" parent="." instance=ExtResource( 2 )]
+[node name="Blue2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 480, 96 )
 color = "Blue"
 
-[node name="Blue4" parent="." instance=ExtResource( 2 )]
+[node name="Blue3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 544, 96 )
 color = "Blue"
 
+[node name="Blue4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 608, 96 )
+color = "Blue"
+
 [node name="Red1" parent="." instance=ExtResource( 2 )]
-position = Vector2( 672, 224 )
+position = Vector2( 736, 224 )
 color = "Red"
 
 [node name="Red2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 672, 288 )
+position = Vector2( 736, 288 )
 color = "Red"
 
 [node name="Red3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 672, 352 )
+position = Vector2( 736, 352 )
 color = "Red"
 
 [node name="Red4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 672, 416 )
+position = Vector2( 736, 416 )
 color = "Red"
 
 [node name="Yellow1" parent="." instance=ExtResource( 2 )]
-position = Vector2( 544, 544 )
+position = Vector2( 608, 544 )
 color = "Yellow"
 
 [node name="Yellow2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 480, 544 )
+position = Vector2( 544, 544 )
 color = "Yellow"
 
 [node name="Yellow3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 416, 544 )
+position = Vector2( 480, 544 )
 color = "Yellow"
 
 [node name="Yellow4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 352, 544 )
+position = Vector2( 416, 544 )
 color = "Yellow"
 
 [node name="Green1" parent="." instance=ExtResource( 2 )]
-position = Vector2( 224, 416 )
+position = Vector2( 288, 416 )
 color = "Green"
 
 [node name="Green2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 224, 352 )
+position = Vector2( 288, 352 )
 color = "Green"
 
 [node name="Green3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 224, 288 )
+position = Vector2( 288, 288 )
 color = "Green"
 
 [node name="Green4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 224, 224 )
+position = Vector2( 288, 224 )
 color = "Green"
 
 [node name="RollButton" parent="." instance=ExtResource( 4 )]
-margin_left = 768.0
-margin_top = 64.0
-margin_right = 896.0
-margin_bottom = 128.0
+margin_left = 832.0
+margin_top = 96.0
+margin_right = 960.0
+margin_bottom = 160.0
 hoverable = true
 
 [node name="FlipButton" parent="." instance=ExtResource( 4 )]
-margin_left = 768.0
-margin_top = 192.0
-margin_right = 896.0
-margin_bottom = 256.0
+margin_left = 832.0
+margin_top = 224.0
+margin_right = 960.0
+margin_bottom = 288.0
 hoverable = true
 
 [node name="ReviveButton" parent="." instance=ExtResource( 4 )]
-margin_left = 768.0
-margin_top = 448.0
-margin_right = 896.0
-margin_bottom = 512.0
+margin_left = 832.0
+margin_top = 480.0
+margin_right = 960.0
+margin_bottom = 544.0
 hoverable = true
 
 [node name="SkipButton" parent="." instance=ExtResource( 4 )]
-margin_left = 768.0
-margin_top = 320.0
-margin_right = 896.0
-margin_bottom = 384.0
+margin_left = 832.0
+margin_top = 352.0
+margin_right = 960.0
+margin_bottom = 416.0
 hoverable = true
 
 [node name="PlayAgain" parent="." instance=ExtResource( 4 )]
+margin_left = 192.0
+margin_top = 320.0
+margin_right = 448.0
+margin_bottom = 448.0
 
 [node name="MainMenu" parent="." instance=ExtResource( 4 )]
-margin_top = 384.0
+margin_left = 576.0
+margin_top = 320.0
+margin_right = 832.0
 margin_bottom = 448.0
 
 [node name="RollDisplay" type="AnimatedSprite" parent="."]
-position = Vector2( 96, 224 )
+position = Vector2( 128, 160 )
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 1 )
 animation = "rolling"
 
 [node name="FlipDisplay" type="AnimatedSprite" parent="."]
-position = Vector2( 96, 416 )
-scale = Vector2( 0.333, 0.333 )
+position = Vector2( 128, 480 )
+scale = Vector2( 0.666667, 0.723443 )
 frames = SubResource( 2 )
 animation = "flip"
 
 [node name="TurnDisplay" type="Sprite" parent="."]
-position = Vector2( 96, 320 )
-scale = Vector2( 0.125, 0.125 )
+position = Vector2( 128, 320 )
+scale = Vector2( 0.175, 0.175 )
 
 [node name="EndingDisplay" type="Sprite" parent="."]
 position = Vector2( 512, 96 )
-scale = Vector2( 0.125, 0.125 )
+scale = Vector2( 0.25, 0.25 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="MusicCredits" type="Label" parent="."]
+margin_left = 8.0
+margin_top = 624.0
+margin_right = 257.0
+margin_bottom = 638.0
+text = "BG Music from Unity Asset Store by B.G.M"
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -20.0
 
 [connection signal="clicked" from="1-1" to="." method="_on_Tile_clicked"]
 [connection signal="clicked" from="1-2" to="." method="_on_Tile_clicked"]
