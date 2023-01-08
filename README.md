@@ -9,10 +9,3 @@ Current Known Issues (commented where location of issue is known):
  - none! (for now)
 
 ||---------------------------------------------------------------||
-
-To-Do:
-
- - Sound Effects
- - Add comments to code
- - Testing & bug fixes
-
