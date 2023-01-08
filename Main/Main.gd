@@ -72,7 +72,7 @@ func _process(_delta): # runs every frame
 	$MainMenu.color = currentPlayer
 	
 	var musicPosition = $BGMusic.get_playback_position()
-	if ((musicPosition > 15.99 || (musicPosition > 7.99 && musicPosition < 8.02)) && stopAudio):
+	if ((musicPosition > 15.9 || (musicPosition > 7.99 && musicPosition < 8.02)) && stopAudio):
 		$BGMusic.stop()
 
 func _on_RollButton_pressed(): # runs when the roll button is pressed
