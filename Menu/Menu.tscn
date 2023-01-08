@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://Buttons/Button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/TitlePanel.png" type="Texture" id=3]
 [ext_resource path="res://Assets/GameBackground.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Retro Tuned MusicLoop.wav" type="AudioStream" id=5]
 
 [node name="Menu" type="Node"]
 script = ExtResource( 1 )
@@ -53,7 +54,7 @@ margin_right = 960.0
 margin_bottom = 640.0
 scroll_horizontal_enabled = false
 
-[node name="Label" type="Label" parent="ScrollContainer"]
+[node name="HowToPlayText" type="Label" parent="ScrollContainer"]
 margin_right = 884.0
 margin_bottom = 609.0
 size_flags_horizontal = 3
@@ -87,6 +88,17 @@ Ending:
 If, at any point, there is only one player left in the game, they win. If everyone is killed at once (during a round change), then a draw occurs. A draw can also occur if the 4th round ends without a winner. Good luck!
 "
 autowrap = true
+
+[node name="MusicCredits" type="Label" parent="."]
+margin_left = 8.0
+margin_top = 624.0
+margin_right = 353.0
+margin_bottom = 638.0
+text = "BG Music from Unity Asset Store by Adam Goik Music"
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -18.0
 
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="HowToPlay" to="." method="_on_HowToPlay_pressed"]
