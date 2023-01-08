@@ -1,0 +1,96 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Menu/Menu.gd" type="Script" id=1]
+[ext_resource path="res://Buttons/Button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/TitlePanel.png" type="Texture" id=3]
+[ext_resource path="res://Assets/GameBackground.png" type="Texture" id=4]
+
+[node name="Menu" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 512, 320 )
+texture = ExtResource( 4 )
+
+[node name="TitlePanel" type="TextureRect" parent="."]
+margin_left = 384.0
+margin_top = 64.0
+margin_right = 640.0
+margin_bottom = 192.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Start" parent="." instance=ExtResource( 2 )]
+margin_left = 384.0
+margin_top = 288.0
+margin_right = 640.0
+margin_bottom = 416.0
+
+[node name="HowToPlay" parent="." instance=ExtResource( 2 )]
+margin_top = 512.0
+margin_bottom = 576.0
+
+[node name="2Player" parent="." instance=ExtResource( 2 )]
+margin_left = 256.0
+margin_right = 384.0
+
+[node name="3Player" parent="." instance=ExtResource( 2 )]
+
+[node name="4Player" parent="." instance=ExtResource( 2 )]
+margin_left = 640.0
+margin_right = 768.0
+
+[node name="MainMenu" parent="." instance=ExtResource( 2 )]
+margin_left = 128.0
+margin_top = 128.0
+margin_right = 256.0
+margin_bottom = 192.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 64.0
+margin_top = 256.0
+margin_right = 960.0
+margin_bottom = 640.0
+scroll_horizontal_enabled = false
+
+[node name="Label" type="Label" parent="ScrollContainer"]
+margin_right = 884.0
+margin_bottom = 609.0
+size_flags_horizontal = 3
+text = "Flip or Skip: How to Play
+
+Objective: Be the last player standing!
+Amount of Players: 2-4 players
+
+Turns:
+The color of the current player is displayed on the panel on the left side of the board. To begin, roll the die using the roll button, and select which piece you would like to move. Tiles that can be moved to will be displayed in pink. You can only move to a space that is not occupied by one of your own pawns.
+
+If you choose to move to a space with an opponent’s piece on it, you swap positions.
+
+Flips:
+If a flip is possible, after you have moved, opposite side tiles will be displayed in pink, and the corresponding option will appear.
+If you flip to kill, you risk your own piece for the opponent’s piece. If you flip heads, the opponent’s piece (the one on the opposite side of the board, diagonally opposite counts!) dies. If you flip tails, your piece dies.
+
+If you do not want to take the risk, you may choose to skip. Choose wisely!
+If the opposite piece from yours is one of your own, and you have less than 4 pieces, the revive option will be available. Click the revive button to flip.
+
+If you land heads, one of your pieces is revived. If tails, nothing happens.
+
+Rounds:
+After every player who is still in the game has moved 3 times, the round ends.
+Make sure to watch for the spaces with red lines, those are deadly. If any piece is on one of the unsafe spaces at the end of the round, it dies. Be careful!
+
+After the pieces on unsafe spaces are killed, the board shrinks, and the pawn positions are reset. The game then continues as normal, with a smaller board.
+(Note: if the board is in its smallest state, reviving is no longer available)
+
+Ending:
+If, at any point, there is only one player left in the game, they win. If everyone is killed at once (during a round change), then a draw occurs. A draw can also occur if the 4th round ends without a winner. Good luck!
+"
+autowrap = true
+
+[connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="HowToPlay" to="." method="_on_HowToPlay_pressed"]
+[connection signal="pressed" from="2Player" to="." method="_on_2Player_pressed"]
+[connection signal="pressed" from="3Player" to="." method="_on_3Player_pressed"]
+[connection signal="pressed" from="4Player" to="." method="_on_4Player_pressed"]
+[connection signal="pressed" from="MainMenu" to="." method="_on_MainMenu_pressed"]
