@@ -1,2 +1,2 @@
-# tsa2022-godot-test
-for tsa 2022 godot practice and testing
+# tsa2023-video-game
+tsa 2023 video game repository (project in other branches)
