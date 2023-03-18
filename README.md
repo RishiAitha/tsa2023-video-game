@@ -1,4 +1,4 @@
-# tsa2022-godot-test
+# tsa2023-video-game
 
 **TSA 2023 Video Game Design Project: Flip or Skip**
 
