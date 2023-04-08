@@ -1,3 +1,3 @@
 extends Node
 
-var colors = ["Blue", "Red", "Yellow", "Green"]
+onready var players = 2
