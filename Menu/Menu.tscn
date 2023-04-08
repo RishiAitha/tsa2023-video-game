@@ -47,6 +47,13 @@ margin_top = 128.0
 margin_right = 256.0
 margin_bottom = 192.0
 
+[node name="MuteButton" parent="." instance=ExtResource( 2 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 64.0
+margin_bottom = 64.0
+toggleable = true
+
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 margin_left = 64.0
 margin_top = 256.0
@@ -66,11 +73,11 @@ Amount of Players: 2-4 players
 Turns:
 The color of the current player is displayed on the panel on the left side of the board. To begin, roll the die using the roll button, and select which piece you would like to move. Tiles that can be moved to will be displayed in pink. You can only move to a space that is not occupied by one of your own pawns.
 
-If you choose to move to a space with an opponent’s piece on it, you swap positions.
+If you choose to move to a space with an opponent's piece on it, you swap positions.
 
 Flips:
 If a flip is possible, after you have moved, opposite side tiles will be displayed in pink, and the corresponding option will appear.
-If you flip to kill, you risk your own piece for the opponent’s piece. If you flip heads, the opponent’s piece (the one on the opposite side of the board, diagonally opposite counts!) dies. If you flip tails, your piece dies.
+If you flip to kill, you risk your own piece for the opponent's piece. If you flip heads, the opponent's piece (the one on the opposite side of the board, diagonally opposite counts!) dies. If you flip tails, your piece dies.
 
 If you do not want to take the risk, you may choose to skip. Choose wisely!
 If the opposite piece from yours is one of your own, and you have less than 4 pieces, the revive option will be available. Click the revive button to flip.
@@ -106,3 +113,4 @@ volume_db = -18.0
 [connection signal="pressed" from="3Player" to="." method="_on_3Player_pressed"]
 [connection signal="pressed" from="4Player" to="." method="_on_4Player_pressed"]
 [connection signal="pressed" from="MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="pressed" from="MuteButton" to="." method="_on_MuteButton_pressed"]

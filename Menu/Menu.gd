@@ -1,5 +1,7 @@
 extends Node
 
+var playing = true
+
 func _ready():
 	$Start.show()
 	$"2Player".hide()
@@ -17,17 +19,17 @@ func _on_Start_pressed():
 
 func _on_2Player_pressed():
 	$BGMusic.stop()
-	ColorsSingleton.colors = ["Blue", "dead", "Yellow", "dead"]
+	ColorsSingleton.players = 2
 	get_tree().change_scene("res://Main/Main.tscn")
 
 func _on_3Player_pressed():
 	$BGMusic.stop()
-	ColorsSingleton.colors = ["Blue", "Red", "Yellow", "dead"]
+	ColorsSingleton.players = 3
 	get_tree().change_scene("res://Main/Main.tscn")
 
 func _on_4Player_pressed():
 	$BGMusic.stop()
-	ColorsSingleton.colors = ["Blue", "Red", "Yellow", "Green"]
+	ColorsSingleton.players = 4
 	get_tree().change_scene("res://Main/Main.tscn")
 
 func _on_HowToPlay_pressed():
@@ -46,3 +48,11 @@ func _on_MainMenu_pressed():
 	$Start.show()
 	$HowToPlay.show()
 	$MusicCredits.show()
+
+func _on_MuteButton_pressed():
+	if (playing):
+		AudioServer.set_bus_mute(AudioServer.bus_count - 1, true)
+		playing = false
+	else:
+		AudioServer.set_bus_mute(AudioServer.bus_count - 1, false)
+		playing = true
