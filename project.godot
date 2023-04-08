@@ -38,8 +38,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Board Game Prototype"
-config/icon="res://icon.png"
+config/name="TSA2023 Flip or Skip - States"
+run/main_scene="res://Menu/Menu.tscn"
+config/icon="res://Assets/BluePawn.png"
 
 [autoload]
 
