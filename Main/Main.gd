@@ -25,34 +25,47 @@ var roll # integer storing the roll number
 var validTiles = ["", ""] # valid tiles that can be moved to based on the roll and currentPawn
 
 # tracking rounds
-var gameRound = 1 # the current game round
+var gameRound = 0 # the current game round
 var cycles = 0 # the amount of full turn rotations gone, used to increment gameRound when all players have moved
 
 # tracking tiles and pawns for specific uses
-var tileCount = 28 # the total amount of tiles in play
+var tileCount = 36 # the total amount of tiles in play
 var colorCount = 0 # the amount of pawns left in a certain color
 
 # used for finding the next current player and managing which players are still in the game
-var colors = ColorsSingleton.colors # current characters in play, using a global singleton to access it between scenes to modify amount of players when starting
-var currentIndex = 0 # index used to increment the current player
-var currentPlayer = colors[currentIndex] # current player color that can move
+var colors # current characters in play, using a global singleton to access it between scenes to modify amount of players when starting
+var currentIndex # index used to increment the current player
+var currentPlayer # current player color that can move
 
+var playing = true
 var stopAudio = false
 
 onready var tween = get_node("Tween")
 
 func _ready(): # ryns when the main scene is initialized into the scene tree
 	randomize() # makes sure all numbers are random
+	
+	# used for finding the next current player and managing which players are still in the game
+	if (ColorsSingleton.players == 2):
+		colors = ["Blue", "dead", "Yellow", "dead"]
+	elif (ColorsSingleton.players == 3):
+		colors = ["Blue", "Red", "Yellow", "dead"]
+	elif (ColorsSingleton.players == 4):
+		colors = ["Blue", "Red", "Yellow", "Green"]
+	currentIndex = 0
+	currentPlayer = colors[currentIndex]
+	
 	# hides correct tiles and buttons
 	var tiles = get_tree().get_nodes_in_group("all_tiles")
 	for tile in tiles:
-		if (int(tile.name.get_slice("-", 0)) != 1):
+		if (int(tile.name.get_slice("-", 0)) != 0):
 			tile.hide()
 	$FlipButton.hide()
 	$ReviveButton.hide()
 	$SkipButton.hide()
 	$PlayAgain.hide()
 	$MainMenu.hide()
+	$Pipe.hide()
 	$RollDisplay.playing = false
 	$FlipDisplay.playing = false
 	$BGMusic.play()
@@ -81,7 +94,7 @@ func _on_RollButton_pressed(): # runs when the roll button is pressed
 			roll = randi() % 6 + 1
 		else:
 			roll = randi() % 3 + 1
-		
+
 		$RollButton.hide() # hiding roll button until turn ends
 		
 		$RollDisplay.playing = true
@@ -89,6 +102,7 @@ func _on_RollButton_pressed(): # runs when the roll button is pressed
 		$RollDisplay.playing = false
 		$RollDisplay.frame = roll - 1
 		rolled = true # shows that the roll is done
+		roll = 4 # remove after testing
 
 func _on_Pawn_clicked(clickedPawn): # runs when the pawn is clicked
 	if (get_node(clickedPawn).color == currentPlayer): # if the pawn is the correct color
@@ -147,7 +161,7 @@ func _on_Tile_clicked(clickedTile): # runs when a tile is clicked
 		if (tilePawn == null): # if there isnt a pawn on the tile
 			tween.interpolate_property(get_node(currentPawn), "position", get_node(currentPawn).position, get_node(clickedTile).position, 0.3, 0, 2, 0)
 			tween.start()
-			
+			yield($Tween, "tween_completed")
 			moving = false # no longer in a move, so set to false
 			
 			moved = true # move is over, so set to true
@@ -157,7 +171,7 @@ func _on_Tile_clicked(clickedTile): # runs when a tile is clicked
 			tween.interpolate_property(tilePawn, "position", tilePawn.position, get_node(currentPawn).position, 0.3, 0, 2, 0)
 			tween.interpolate_property(get_node(currentPawn), "position", get_node(currentPawn).position, temp_pos, 0.3, 0, 2, 0)
 			tween.start()
-			
+			yield($Tween, "tween_completed")
 			moved = true # move is over, so set to true
 		
 		if (moved): # if the move is over
@@ -187,7 +201,8 @@ func _on_Tile_clicked(clickedTile): # runs when a tile is clicked
 			for tile in get_tree().get_nodes_in_group("all_tiles"):
 				tile.get_node("AnimatedSprite").frame = 0
 			
-			$RollButton.show() # giving option to roll after turn ends
+			if (!stopAudio):
+				$RollButton.show() # giving option to roll after turn ends
 			
 			# finding the last player alive
 			var lastPlayer = "none"
@@ -217,14 +232,25 @@ func _on_Tile_clicked(clickedTile): # runs when a tile is clicked
 				for tile in tiles:
 					var unsafePawn = pawnCheck(tile.name)
 					
-					if (unsafePawn != null && !tile.safe && int(tile.name.get_slice("-", 0)) == (gameRound - 1)):
+					if (unsafePawn != null && !tile.safe && int(tile.name.get_slice("-", 0)) == (gameRound - 1)): # gameRound has -1 because it was already incremented earlier
 						unsafePawn.get_node("AnimatedSprite").animation = unsafePawn.color + "-Dead"
 						unsafePawn.get_node("AnimatedSprite").playing = true
-						yield(get_tree().create_timer(1), "timeout")
+						
+						$Pipe.show()
+						$Pipe.position.x = unsafePawn.position.x
+						tween.interpolate_property($Pipe, "position:y", $Pipe.position.y, unsafePawn.position.y - 304, 1, 7, 2, 0)
+						tween.start()
+						yield($Tween, "tween_completed")
+						tween.interpolate_property(unsafePawn, "position:y", unsafePawn.position.y, unsafePawn.position.y - 64, 1, 0, 2, 0)
+						tween.start()
+						yield($Tween, "tween_completed")
 						unsafePawn.get_node("AnimatedSprite").playing = false
 						unsafePawn.get_node("AnimatedSprite").animation = unsafePawn.color
-						
 						unsafePawn.queue_free()
+						tween.interpolate_property($Pipe, "position:y", $Pipe.position.y, -304, 1, 7, 2, 0)
+						tween.start()
+						yield($Tween, "tween_completed")
+						$Pipe.hide()
 						yield(get_tree(), "idle_frame")
 				updateColors() # updates which players still remain because pawns may have been killed
 				
@@ -248,18 +274,19 @@ func _on_Tile_clicked(clickedTile): # runs when a tile is clicked
 								tween.start()
 								yield($Tween, "tween_completed")
 								break
-				
-				$RollButton.show()
+				if (!stopAudio):
+					$RollButton.show()
 			
 			# incrementing the current player at the end of a move, after everything has been updated and is ready for the next turn
-			var increment = 0
-			while(currentPlayer == "dead" || increment == 0):
+
+			while(true):
 				if (currentIndex < 3):
 					currentIndex += 1
 				else:
 					currentIndex = 0
 				currentPlayer = colors[currentIndex]
-				increment = 1
+				if (currentPlayer != "dead"):
+					break
 
 func revive(): # called to check if the revive should happen or not (technically could be put directly in the tile signal method)
 	yield(get_tree(), "idle_frame")
@@ -270,7 +297,7 @@ func revive(): # called to check if the revive should happen or not (technically
 	for forPawn in pawns:
 		if (forPawn.color == pawn.color && !forPawn.is_queued_for_deletion()):
 			colorCount += 1
-	if (colorCount < 4 && gameRound < 4): # you can't revive on the last round
+	if (colorCount < 5 && gameRound < 4): # you can't revive on the last round, fix colorCount check (set to 4) after testing
 		$ReviveButton.show() # shows the option to revive if there is space for another pawn of the color
 		yield(self, "buttonsFinished") # waits for the button function to be done
 
@@ -281,6 +308,7 @@ func _on_FlipButton_pressed(): # when the flip to kill option is chosen
 	
 	# chooses the flip, displays the info, queues the correct pawn for deletion, and waits for one frame to delete the pawn
 	var flip = randi() % 2 + 1
+	flip = 1; # remove after testing
 	
 	yield(get_tree().create_timer(0.5), "timeout") # just to see what's happening easier
 	
@@ -292,25 +320,48 @@ func _on_FlipButton_pressed(): # when the flip to kill option is chosen
 	if (flip == 1):
 		oppositePawn.get_node("AnimatedSprite").animation = oppositePawn.color + "-Dead"
 		oppositePawn.get_node("AnimatedSprite").playing = true
-		yield(get_tree().create_timer(2), "timeout")
+		
+		$Pipe.show()
+		$Pipe.position.x = oppositePawn.position.x
+		tween.interpolate_property($Pipe, "position:y", $Pipe.position.y, oppositePawn.position.y - 304, 1, 7, 2, 0)
+		tween.start()
+		yield($Tween, "tween_completed")
+		tween.interpolate_property(oppositePawn, "position:y", oppositePawn.position.y, oppositePawn.position.y - 64, 1, 0, 2, 0)
+		tween.start()
+		yield($Tween, "tween_completed")
 		oppositePawn.get_node("AnimatedSprite").playing = false
 		oppositePawn.get_node("AnimatedSprite").animation = oppositePawn.color
-		
 		oppositePawn.queue_free()
+		tween.interpolate_property($Pipe, "position:y", $Pipe.position.y, -304, 1, 7, 2, 0)
+		tween.start()
+		yield($Tween, "tween_completed")
+		$Pipe.hide()
 		yield(get_tree(), "idle_frame")
 	else:
 		get_node(currentPawn).get_node("AnimatedSprite").animation = get_node(currentPawn).color + "-Dead"
 		get_node(currentPawn).get_node("AnimatedSprite").playing = true
-		yield(get_tree().create_timer(2), "timeout")
+		
+		$Pipe.show()
+		$Pipe.position.x = get_node(currentPawn).position.x
+		tween.interpolate_property($Pipe, "position:y", $Pipe.position.y, get_node(currentPawn).position.y - 304, 1, 7, 2, 0)
+		tween.start()
+		yield($Tween, "tween_completed")
+		tween.interpolate_property(get_node(currentPawn), "position:y", get_node(currentPawn).position.y, get_node(currentPawn).position.y - 64, 1, 0, 2, 0)
+		tween.start()
+		yield($Tween, "tween_completed")
 		get_node(currentPawn).get_node("AnimatedSprite").playing = false
 		get_node(currentPawn).get_node("AnimatedSprite").animation = get_node(currentPawn).color
-		
 		get_node(currentPawn).queue_free()
+		tween.interpolate_property($Pipe, "position:y", $Pipe.position.y, -304, 1, 7, 2, 0)
+		tween.start()
+		yield($Tween, "tween_completed")
+		$Pipe.hide()
 		yield(get_tree(), "idle_frame")
 	
 	emit_signal("buttonsFinished", "flipped") # emits signal saying that the buttons are done
 
 func _on_ReviveButton_pressed(): # when the revive options is chosen
+	$ReviveButton.hide()
 	var pawn = get_node(currentPawn)
 	var tiles = get_tree().get_nodes_in_group("all_tiles")
 	
@@ -321,6 +372,8 @@ func _on_ReviveButton_pressed(): # when the revive options is chosen
 	yield(get_tree().create_timer(2), "timeout")
 	$FlipDisplay.playing = false
 	$FlipDisplay.frame = flip - 1
+	
+	flip = 1 # remove after testing
 	
 	if (flip == 1): # if the flip is heads
 		# creates a new pawn and sets the values
@@ -346,17 +399,32 @@ func _on_ReviveButton_pressed(): # when the revive options is chosen
 					break
 		
 		if (newPawn.position != defaultPos):
-			add_child(newPawn)
+			$Pipe.show()
+			$Pipe.position.x = newPawn.position.x
+			tween.interpolate_property($Pipe, "position:y", $Pipe.position.y, newPawn.position.y - 304, 1, 7, 2, 0)
+			tween.start()
+			yield($Tween, "tween_completed")
 			
+			newPawn.position.y -= 64
+			
+			add_child(newPawn)
 			newPawn.get_node("AnimatedSprite").speed_scale = 2
 			newPawn.get_node("AnimatedSprite").playing = true
-			yield(get_tree().create_timer(1), "timeout")
+			
+			tween.interpolate_property(newPawn, "position:y", newPawn.position.y, newPawn.position.y + 64, 1, 0, 2, 0)
+			tween.start()
+			yield($Tween, "tween_completed")
+			
+			tween.interpolate_property($Pipe, "position:y", $Pipe.position.y, -304, 1, 7, 2, 0)
+			tween.start()
+			yield($Tween, "tween_completed")
+			$Pipe.hide()
+			
 			newPawn.get_node("AnimatedSprite").playing = false
 			newPawn.get_node("AnimatedSprite").speed_scale = 1
 			newPawn.get_node("AnimatedSprite").frame = 0
 	
 	# hides buttons and emits the signal saying that the buttons are done
-	$ReviveButton.hide()
 	$SkipButton.hide()
 	emit_signal("buttonsFinished", "revived")
 
@@ -425,8 +493,6 @@ func updateColors(): # updates the current players based on if there are any paw
 		call_deferred("gameOver", "allDead")
 
 func gameOver(reason): # called when the game ends, taking the reason that the game ended
-	$RollButton.hide()
-	
 	yield(get_tree().create_timer(1), "timeout") # just to see what's happening easier
 	
 	stopAudio = true
@@ -449,3 +515,12 @@ func gameOver(reason): # called when the game ends, taking the reason that the g
 	$MainMenu.show()
 	
 	yield(self, "buttonsFinished")
+
+
+func _on_MuteButton_pressed():
+	if (playing):
+		AudioServer.set_bus_mute(AudioServer.bus_count - 1, true)
+		playing = false
+	else:
+		AudioServer.set_bus_mute(AudioServer.bus_count - 1, false)
+		playing = true

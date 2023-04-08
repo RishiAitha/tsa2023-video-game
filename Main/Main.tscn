@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Tile/Tile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Pawn/Pawn.tscn" type="PackedScene" id=2]
@@ -14,13 +14,14 @@
 [ext_resource path="res://Assets/TailsFlip.png" type="Texture" id=12]
 [ext_resource path="res://Assets/GameBackground.png" type="Texture" id=13]
 [ext_resource path="res://Assets/ArcadeGameBGM#17.wav" type="AudioStream" id=14]
+[ext_resource path="res://Assets/Pipe.png" type="Texture" id=15]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 5 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "rolling",
-"speed": 4.0
+"speed": 8.0
 } ]
 
 [sub_resource type="SpriteFrames" id=2]
@@ -28,6 +29,14 @@ animations = [ {
 "frames": [ ExtResource( 11 ), ExtResource( 12 ) ],
 "loop": true,
 "name": "flip",
+"speed": 8.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "default",
 "speed": 5.0
 } ]
 
@@ -41,6 +50,210 @@ pawn_scene = ExtResource( 2 )
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 512, 320 )
 texture = ExtResource( 13 )
+
+[node name="0-1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 32 )
+opposite_tile = "0-19"
+type = "TL"
+
+[node name="0-2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 288, 32 )
+opposite_tile = "0-27"
+safe = false
+type = "Up"
+
+[node name="0-3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 32 )
+opposite_tile = "0-26"
+type = "Up"
+
+[node name="0-4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 416, 32 )
+opposite_tile = "0-25"
+spawn = "Blue"
+type = "Up"
+
+[node name="0-5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 480, 32 )
+opposite_tile = "0-24"
+spawn = "Blue"
+type = "Up"
+
+[node name="0-6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 544, 32 )
+opposite_tile = "0-23"
+spawn = "Blue"
+type = "Up"
+
+[node name="0-7" parent="." instance=ExtResource( 1 )]
+position = Vector2( 608, 32 )
+opposite_tile = "0-22"
+spawn = "Blue"
+type = "Up"
+
+[node name="0-8" parent="." instance=ExtResource( 1 )]
+position = Vector2( 672, 32 )
+opposite_tile = "0-21"
+type = "Up"
+
+[node name="0-9" parent="." instance=ExtResource( 1 )]
+position = Vector2( 736, 32 )
+opposite_tile = "0-20"
+safe = false
+type = "Up"
+
+[node name="0-10" parent="." instance=ExtResource( 1 )]
+position = Vector2( 800, 32 )
+opposite_tile = "0-28"
+type = "TR"
+
+[node name="0-11" parent="." instance=ExtResource( 1 )]
+position = Vector2( 800, 96 )
+opposite_tile = "0-36"
+safe = false
+type = "Right"
+
+[node name="0-12" parent="." instance=ExtResource( 1 )]
+position = Vector2( 800, 160 )
+opposite_tile = "0-35"
+type = "Right"
+
+[node name="0-13" parent="." instance=ExtResource( 1 )]
+position = Vector2( 800, 224 )
+opposite_tile = "0-34"
+spawn = "Red"
+type = "Right"
+
+[node name="0-14" parent="." instance=ExtResource( 1 )]
+position = Vector2( 800, 288 )
+opposite_tile = "0-33"
+spawn = "Red"
+type = "Right"
+
+[node name="0-15" parent="." instance=ExtResource( 1 )]
+position = Vector2( 800, 352 )
+opposite_tile = "0-32"
+spawn = "Red"
+type = "Right"
+
+[node name="0-16" parent="." instance=ExtResource( 1 )]
+position = Vector2( 800, 416 )
+opposite_tile = "0-31"
+spawn = "Red"
+type = "Right"
+
+[node name="0-17" parent="." instance=ExtResource( 1 )]
+position = Vector2( 800, 480 )
+opposite_tile = "0-30"
+type = "Right"
+
+[node name="0-18" parent="." instance=ExtResource( 1 )]
+position = Vector2( 800, 544 )
+opposite_tile = "0-29"
+safe = false
+type = "Right"
+
+[node name="0-19" parent="." instance=ExtResource( 1 )]
+position = Vector2( 800, 608 )
+opposite_tile = "0-1"
+type = "BR"
+
+[node name="0-20" parent="." instance=ExtResource( 1 )]
+position = Vector2( 736, 608 )
+opposite_tile = "0-9"
+safe = false
+type = "Down"
+
+[node name="0-21" parent="." instance=ExtResource( 1 )]
+position = Vector2( 672, 608 )
+opposite_tile = "0-8"
+type = "Down"
+
+[node name="0-22" parent="." instance=ExtResource( 1 )]
+position = Vector2( 608, 608 )
+opposite_tile = "0-7"
+spawn = "Yellow"
+type = "Down"
+
+[node name="0-23" parent="." instance=ExtResource( 1 )]
+position = Vector2( 544, 608 )
+opposite_tile = "0-6"
+spawn = "Yellow"
+type = "Down"
+
+[node name="0-24" parent="." instance=ExtResource( 1 )]
+position = Vector2( 480, 608 )
+opposite_tile = "0-5"
+spawn = "Yellow"
+type = "Down"
+
+[node name="0-25" parent="." instance=ExtResource( 1 )]
+position = Vector2( 416, 608 )
+opposite_tile = "0-4"
+spawn = "Yellow"
+type = "Down"
+
+[node name="0-26" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 608 )
+opposite_tile = "0-3"
+type = "Down"
+
+[node name="0-27" parent="." instance=ExtResource( 1 )]
+position = Vector2( 288, 608 )
+opposite_tile = "0-2"
+safe = false
+type = "Down"
+
+[node name="0-28" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 608 )
+opposite_tile = "0-10"
+type = "BL"
+
+[node name="0-29" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 544 )
+opposite_tile = "0-18"
+safe = false
+type = "Left"
+
+[node name="0-30" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 480 )
+opposite_tile = "0-17"
+type = "Left"
+
+[node name="0-31" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 416 )
+opposite_tile = "0-16"
+spawn = "Green"
+type = "Left"
+
+[node name="0-32" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 352 )
+opposite_tile = "0-15"
+spawn = "Green"
+type = "Left"
+
+[node name="0-33" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 288 )
+opposite_tile = "0-14"
+spawn = "Green"
+type = "Left"
+
+[node name="0-34" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 224 )
+opposite_tile = "0-13"
+spawn = "Green"
+type = "Left"
+
+[node name="0-35" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 160 )
+opposite_tile = "0-12"
+type = "Left"
+
+[node name="0-36" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 96 )
+opposite_tile = "0-11"
+safe = false
+type = "Left"
 
 [node name="1-1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 288, 96 )
@@ -434,95 +647,95 @@ spawn = "everything"
 type = "BL"
 
 [node name="Blue1" parent="." instance=ExtResource( 2 )]
-position = Vector2( 416, 96 )
+position = Vector2( 416, 32 )
 color = "Blue"
 
 [node name="Blue2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 480, 96 )
+position = Vector2( 480, 32 )
 color = "Blue"
 
 [node name="Blue3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 544, 96 )
+position = Vector2( 544, 32 )
 color = "Blue"
 
 [node name="Blue4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 608, 96 )
+position = Vector2( 608, 32 )
 color = "Blue"
 
 [node name="Red1" parent="." instance=ExtResource( 2 )]
-position = Vector2( 736, 224 )
+position = Vector2( 800, 224 )
 color = "Red"
 
 [node name="Red2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 736, 288 )
+position = Vector2( 800, 288 )
 color = "Red"
 
 [node name="Red3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 736, 352 )
+position = Vector2( 800, 352 )
 color = "Red"
 
 [node name="Red4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 736, 416 )
+position = Vector2( 800, 416 )
 color = "Red"
 
 [node name="Yellow1" parent="." instance=ExtResource( 2 )]
-position = Vector2( 608, 544 )
+position = Vector2( 608, 608 )
 color = "Yellow"
 
 [node name="Yellow2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 544, 544 )
+position = Vector2( 544, 608 )
 color = "Yellow"
 
 [node name="Yellow3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 480, 544 )
+position = Vector2( 480, 608 )
 color = "Yellow"
 
 [node name="Yellow4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 416, 544 )
+position = Vector2( 416, 608 )
 color = "Yellow"
 
 [node name="Green1" parent="." instance=ExtResource( 2 )]
-position = Vector2( 288, 416 )
+position = Vector2( 224, 416 )
 color = "Green"
 
 [node name="Green2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 288, 352 )
+position = Vector2( 224, 352 )
 color = "Green"
 
 [node name="Green3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 288, 288 )
+position = Vector2( 224, 288 )
 color = "Green"
 
 [node name="Green4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 288, 224 )
+position = Vector2( 224, 224 )
 color = "Green"
 
 [node name="RollButton" parent="." instance=ExtResource( 4 )]
-margin_left = 832.0
+margin_left = 864.0
 margin_top = 96.0
-margin_right = 960.0
+margin_right = 992.0
 margin_bottom = 160.0
 hoverable = true
 
 [node name="FlipButton" parent="." instance=ExtResource( 4 )]
-margin_left = 832.0
+margin_left = 864.0
 margin_top = 224.0
-margin_right = 960.0
+margin_right = 992.0
 margin_bottom = 288.0
 hoverable = true
 
-[node name="ReviveButton" parent="." instance=ExtResource( 4 )]
-margin_left = 832.0
-margin_top = 480.0
-margin_right = 960.0
-margin_bottom = 544.0
+[node name="SkipButton" parent="." instance=ExtResource( 4 )]
+margin_left = 864.0
+margin_top = 352.0
+margin_right = 992.0
+margin_bottom = 416.0
 hoverable = true
 
-[node name="SkipButton" parent="." instance=ExtResource( 4 )]
-margin_left = 832.0
-margin_top = 352.0
-margin_right = 960.0
-margin_bottom = 416.0
+[node name="ReviveButton" parent="." instance=ExtResource( 4 )]
+margin_left = 864.0
+margin_top = 480.0
+margin_right = 992.0
+margin_bottom = 544.0
 hoverable = true
 
 [node name="PlayAgain" parent="." instance=ExtResource( 4 )]
@@ -537,39 +750,90 @@ margin_top = 320.0
 margin_right = 832.0
 margin_bottom = 448.0
 
+[node name="MuteButton" parent="." instance=ExtResource( 4 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 64.0
+margin_bottom = 64.0
+toggleable = true
+
 [node name="RollDisplay" type="AnimatedSprite" parent="."]
-position = Vector2( 128, 160 )
+position = Vector2( 96, 160 )
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 1 )
 animation = "rolling"
 
 [node name="FlipDisplay" type="AnimatedSprite" parent="."]
-position = Vector2( 128, 480 )
+position = Vector2( 96, 480 )
 scale = Vector2( 0.666667, 0.723443 )
 frames = SubResource( 2 )
 animation = "flip"
 
 [node name="TurnDisplay" type="Sprite" parent="."]
-position = Vector2( 128, 320 )
+position = Vector2( 96, 320 )
 scale = Vector2( 0.175, 0.175 )
 
 [node name="EndingDisplay" type="Sprite" parent="."]
 position = Vector2( 512, 96 )
 scale = Vector2( 0.25, 0.25 )
 
+[node name="Pipe" type="AnimatedSprite" parent="."]
+position = Vector2( 416, -304 )
+scale = Vector2( 1, 1.05556 )
+z_index = 1
+frames = SubResource( 3 )
+
 [node name="Tween" type="Tween" parent="."]
 
 [node name="MusicCredits" type="Label" parent="."]
 margin_left = 8.0
-margin_top = 624.0
-margin_right = 257.0
-margin_bottom = 638.0
-text = "BG Music from Unity Asset Store by B.G.M"
+margin_top = 584.0
+margin_right = 153.0
+margin_bottom = 632.0
+text = "BG Music
+from Unity Asset Store
+by B.G.M"
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 volume_db = -20.0
 
+[connection signal="clicked" from="0-1" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-2" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-3" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-4" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-5" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-6" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-7" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-8" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-9" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-10" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-11" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-12" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-13" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-14" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-15" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-16" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-17" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-18" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-19" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-20" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-21" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-22" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-23" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-24" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-25" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-26" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-27" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-28" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-29" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-30" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-31" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-32" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-33" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-34" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-35" to="." method="_on_Tile_clicked"]
+[connection signal="clicked" from="0-36" to="." method="_on_Tile_clicked"]
 [connection signal="clicked" from="1-1" to="." method="_on_Tile_clicked"]
 [connection signal="clicked" from="1-2" to="." method="_on_Tile_clicked"]
 [connection signal="clicked" from="1-3" to="." method="_on_Tile_clicked"]
@@ -652,7 +916,8 @@ volume_db = -20.0
 [connection signal="clicked" from="Green4" to="." method="_on_Pawn_clicked"]
 [connection signal="pressed" from="RollButton" to="." method="_on_RollButton_pressed"]
 [connection signal="pressed" from="FlipButton" to="." method="_on_FlipButton_pressed"]
-[connection signal="pressed" from="ReviveButton" to="." method="_on_ReviveButton_pressed"]
 [connection signal="pressed" from="SkipButton" to="." method="_on_SkipButton_pressed"]
+[connection signal="pressed" from="ReviveButton" to="." method="_on_ReviveButton_pressed"]
 [connection signal="pressed" from="PlayAgain" to="." method="_on_PlayAgain_pressed"]
 [connection signal="pressed" from="MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="pressed" from="MuteButton" to="." method="_on_MuteButton_pressed"]
