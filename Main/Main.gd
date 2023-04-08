@@ -102,7 +102,6 @@ func _on_RollButton_pressed(): # runs when the roll button is pressed
 		$RollDisplay.playing = false
 		$RollDisplay.frame = roll - 1
 		rolled = true # shows that the roll is done
-		roll = 4 # remove after testing
 
 func _on_Pawn_clicked(clickedPawn): # runs when the pawn is clicked
 	if (get_node(clickedPawn).color == currentPlayer): # if the pawn is the correct color
@@ -297,7 +296,7 @@ func revive(): # called to check if the revive should happen or not (technically
 	for forPawn in pawns:
 		if (forPawn.color == pawn.color && !forPawn.is_queued_for_deletion()):
 			colorCount += 1
-	if (colorCount < 5 && gameRound < 4): # you can't revive on the last round, fix colorCount check (set to 4) after testing
+	if (colorCount < 4 && gameRound < 4): # you can't revive on the last round
 		$ReviveButton.show() # shows the option to revive if there is space for another pawn of the color
 		yield(self, "buttonsFinished") # waits for the button function to be done
 
@@ -308,7 +307,6 @@ func _on_FlipButton_pressed(): # when the flip to kill option is chosen
 	
 	# chooses the flip, displays the info, queues the correct pawn for deletion, and waits for one frame to delete the pawn
 	var flip = randi() % 2 + 1
-	flip = 1; # remove after testing
 	
 	yield(get_tree().create_timer(0.5), "timeout") # just to see what's happening easier
 	
@@ -373,7 +371,6 @@ func _on_ReviveButton_pressed(): # when the revive options is chosen
 	$FlipDisplay.playing = false
 	$FlipDisplay.frame = flip - 1
 	
-	flip = 1 # remove after testing
 	
 	if (flip == 1): # if the flip is heads
 		# creates a new pawn and sets the values
